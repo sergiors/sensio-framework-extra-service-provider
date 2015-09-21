@@ -1,0 +1,34 @@
+{
+  "name": "inbep/sensio-framework-extra-service-provider",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sérgio Rafael Siqueira",
+      "email": "sergio@inbep.com.br"
+    }
+  ],
+  "require": {
+    "silex/silex": "^1.3",
+    "sensio/framework-extra-bundle": "^3.0",
+    "symfony/expression-language": "^2.7",
+    "inbep/templating-service-provider": "~1",
+    "inbep/routing-service-provider": "dev-master",
+    "inbep/annotation-service-provider": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
+  },
+  "suggest": {
+    "inbep/doctrine-manager-registry-service-provider": ""
+  },
+  "autoload": {
+    "psr-4": {
+      "Inbep\\Silex\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Inbep\\Silex\\": "tests"
+    }
+  }
+}
