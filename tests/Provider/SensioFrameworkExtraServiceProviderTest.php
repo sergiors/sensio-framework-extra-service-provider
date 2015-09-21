@@ -3,7 +3,6 @@ namespace Inbep\Silex\Provider;
 
 use Silex\Application;
 use Silex\WebTestCase;
-use Inbep\Silex\Provider\ConfigServiceProvider;
 use Inbep\Silex\Provider\RoutingServiceProvider;
 use Inbep\Silex\Provider\AnnotationServiceProvider;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener;
