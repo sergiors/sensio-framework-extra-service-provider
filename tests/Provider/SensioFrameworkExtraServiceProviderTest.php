@@ -12,7 +12,10 @@ class SensioFrameworkExtraServiceProviderTest extends WebTestCase
 {
     /**
      * @test
+     *
      * @expectedException \LogicException
+     *
+     * @covers Inbep\Silex\Provider\SensioFrameworkExtraServiceProvider::register
      */
     public function shouldReturnLogicException()
     {
@@ -22,6 +25,8 @@ class SensioFrameworkExtraServiceProviderTest extends WebTestCase
 
     /**
      * @test
+     *
+     * @covers Inbep\Silex\Provider\SensioFrameworkExtraServiceProvider::register
      */
     public function register()
     {
@@ -31,7 +36,10 @@ class SensioFrameworkExtraServiceProviderTest extends WebTestCase
         $app->register(new SensioFrameworkExtraServiceProvider());
 
         $this->assertInstanceOf(ControllerListener::class, $app['sensio_framework_extra.controller.listener']);
-        $this->assertInstanceOf(AnnotatedRouteControllerLoader::class, $app['sensio_framework_extra.routing.loader.annot_class']);
+        $this->assertInstanceOf(
+            AnnotatedRouteControllerLoader::class,
+            $app['sensio_framework_extra.routing.loader.annot_class']
+        );
     }
 
     public function createApplication()

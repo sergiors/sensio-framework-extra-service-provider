@@ -28,7 +28,9 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
     public function register(Application $app)
     {
         if (!isset($app['routing.resolver'])) {
-            throw new \LogicException('You must register the RoutingServiceProvider to use the SensioFrameworkExtraServiceProvider');
+            throw new \LogicException(
+                'You must register the RoutingServiceProvider to use the SensioFrameworkExtraServiceProvider'
+            );
         }
 
         $app['sensio_framework_extra.routing.loader.annot_dir'] = $app->share(

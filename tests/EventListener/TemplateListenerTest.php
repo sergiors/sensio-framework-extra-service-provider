@@ -26,6 +26,12 @@ class TemplateListenerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
+     * @covers Inbep\Silex\EventListener\TemplateListener::onKernelController
+     *
+     * @uses Inbep\Silex\EventListener\TemplateListener::__construct
+     * @uses Inbep\Silex\Templating\TemplateGuesser
+     * @uses Inbep\Silex\Templating\TemplateReference
      */
     public function shouldReturnViewPath()
     {
@@ -37,7 +43,12 @@ class TemplateListenerTest extends \PHPUnit_Framework_TestCase
 
     protected function getFilterControllerEvent($controller, Request $request)
     {
-        return new FilterControllerEvent($this->getKernelMock(), $controller, $request, HttpKernelInterface::MASTER_REQUEST);
+        return new FilterControllerEvent(
+            $this->getKernelMock(),
+            $controller,
+            $request,
+            HttpKernelInterface::MASTER_REQUEST
+        );
     }
 
     protected function getKernelMock()

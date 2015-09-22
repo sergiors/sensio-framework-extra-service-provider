@@ -16,7 +16,13 @@
     "inbep/annotation-service-provider": "dev-master"
   },
   "require-dev": {
-    "phpunit/phpunit": "^4.8"
+    "pdepend/pdepend": "~2.0",
+    "phing/phing": "~2.10",
+    "phploc/phploc": "~2.1",
+    "phpmd/phpmd": "~2.2",
+    "phpunit/phpunit": "~4.8",
+    "sebastian/phpcpd": "~2.0",
+    "squizlabs/php_codesniffer": "~2.1"
   },
   "suggest": {
     "inbep/doctrine-manager-registry-service-provider": ""
