@@ -10,7 +10,7 @@
     </target>
 
     <target name="style">
-    	<exec executable="${project.bindir}/phpcs" passthru="true" checkreturn="true" >
+        <exec executable="${project.bindir}/phpcs" passthru="true" checkreturn="true" >
             <arg value="--standard=PSR2" />
             <arg value="${project.basedir}/src" />
             <arg value="${project.basedir}/tests" />
@@ -74,40 +74,40 @@
         </exec>
     </target>
 
-	<target name="dependencies-ci">
-		<exec executable="${project.bindir}/pdepend" passthru="true">
-		    <arg value="--jdepend-xml=${project.builddir}/logs/jdepend.xml" />
-		    <arg value="--jdepend-chart=${project.builddir}/images/dependencies.svg" />
-		    <arg value="--overview-pyramid=${project.builddir}/images/overview-pyramid.svg" />
-		    <arg path="${project.basedir}/src" />
-	    </exec>
-    </target>
-
-	<target name="phpmd-ci">
-	    <exec executable="${project.bindir}/phpmd" passthru="true">
-	        <arg path="${project.basedir}/src" />
-	        <arg value="xml" />
-	        <arg value="cleancode,codesize,controversial,design,naming,unusedcode" />
-	        <arg value="--reportfile" />
-	        <arg value="${project.builddir}/logs/pmd.xml" />
+    <target name="dependencies-ci">
+        <exec executable="${project.bindir}/pdepend" passthru="true">
+            <arg value="--jdepend-xml=${project.builddir}/logs/jdepend.xml" />
+            <arg value="--jdepend-chart=${project.builddir}/images/dependencies.svg" />
+            <arg value="--overview-pyramid=${project.builddir}/images/overview-pyramid.svg" />
+            <arg path="${project.basedir}/src" />
         </exec>
     </target>
 
-	<target name="style-ci">
-	    <exec executable="${project.bindir}/phpcs" passthru="true">
-	        <arg value="--report=checkstyle" />
-	        <arg value="--report-file=${project.builddir}/logs/checkstyle.xml" />
-	    	<arg value="--standard=PSR2" />
+    <target name="phpmd-ci">
+        <exec executable="${project.bindir}/phpmd" passthru="true">
+            <arg path="${project.basedir}/src" />
+            <arg value="xml" />
+            <arg value="cleancode,codesize,controversial,design,naming,unusedcode" />
+            <arg value="--reportfile" />
+            <arg value="${project.builddir}/logs/pmd.xml" />
+        </exec>
+    </target>
+
+    <target name="style-ci">
+        <exec executable="${project.bindir}/phpcs" passthru="true">
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${project.builddir}/logs/checkstyle.xml" />
+            <arg value="--standard=PSR2" />
             <arg value="${project.basedir}/src" />
             <arg value="${project.basedir}/tests" />
         </exec>
-	</target>
+    </target>
 
-	<target name="duplications-ci">
-	    <exec executable="${project.bindir}/phpcpd" passthru="true">
-	        <arg value="--log-pmd" />
-	        <arg value="${project.builddir}/logs/pmd-cpd.xml" />
-	        <arg path="${project.basedir}/src" />
+    <target name="duplications-ci">
+        <exec executable="${project.bindir}/phpcpd" passthru="true">
+            <arg value="--log-pmd" />
+            <arg value="${project.builddir}/logs/pmd-cpd.xml" />
+            <arg path="${project.basedir}/src" />
         </exec>
-	</target>
+    </target>
 </project>
