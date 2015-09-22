@@ -17,6 +17,11 @@ $app->register(new AnnotationServiceProvider());
 $app->register(new SensioFrameworkExtraServiceProvider());
 ```
 
+To use annotation, you should update your autoload.php by adding the following line:
+```php
+Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+```
+
 License
 -------
 MIT
