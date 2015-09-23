@@ -129,13 +129,13 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
 
     public function boot(Application $app)
     {
-        if (isset($app['security'])) {
-            $app['dispatcher']->addSubscriber($app['sensio_framework_extra.security.listener']);
-        }
-
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.controller.listener']);
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.cache.listener']);
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.view.listener']);
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.converter.listener']);
+
+        if (isset($app['security'])) {
+            $app['dispatcher']->addSubscriber($app['sensio_framework_extra.security.listener']);
+        }
     }
 }
