@@ -1,5 +1,7 @@
 Sensio Framework Extra for Silex
 --------------------------------
+[![Build Status](https://travis-ci.org/inbep/sensio-framework-extra-service-provider.svg?branch=master)](https://travis-ci.org/inbep/sensio-framework-extra-service-provider)
+
 To see the complete documentation, check out [SensioFrameworkExtraBundle](http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html)
 
 Install
