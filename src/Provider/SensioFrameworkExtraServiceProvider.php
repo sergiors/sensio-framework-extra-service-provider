@@ -29,7 +29,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
     {
         if (!isset($app['routing.resolver'])) {
             throw new \LogicException(
-                'You must register the RoutingServiceProvider to use the SensioFrameworkExtraServiceProvider'
+                'You must register the RoutingServiceProvider to use the SensioFrameworkExtraServiceProvider.'
             );
         }
 
