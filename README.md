@@ -21,7 +21,7 @@ $app->register(new SensioFrameworkExtraServiceProvider());
 
 To use annotation, you should update your autoload.php by adding the following line:
 ```php
-Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+Doctrine\Common\Annotations\AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 ```
 
 License
