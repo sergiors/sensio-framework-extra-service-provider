@@ -1,4 +1,6 @@
 vendor/
 tmp/
 composer.lock
-/build/
+.idea/
+build/
+phpunit.xml

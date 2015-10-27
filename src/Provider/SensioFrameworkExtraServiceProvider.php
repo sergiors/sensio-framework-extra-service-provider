@@ -69,10 +69,6 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
 
         $app['sensio_framework_extra.security.listener'] = $app->share(
             function (Application $app) {
-                if (!isset($app['security'])) {
-                    return;
-                }
-
                 return new SecurityListener(
                     $app['security'],
                     $app['sensio_framework_extra.security.expression_language'],

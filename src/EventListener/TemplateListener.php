@@ -119,9 +119,9 @@ class TemplateListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
-            KernelEvents::CONTROLLER => array('onKernelController', -128),
+        return [
+            KernelEvents::CONTROLLER => ['onKernelController', -128],
             KernelEvents::VIEW => 'onKernelView',
-        );
+        ];
     }
 }
