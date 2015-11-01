@@ -7,7 +7,7 @@ To see the complete documentation, check out [SensioFrameworkExtraBundle](http:/
 Install
 -------
 ```bash
-composer require sergiors/sensio-framework-extra-service-provider
+composer require sergiors/sensio-framework-extra-service-provider "dev-master"
 ```
 
 ```php
