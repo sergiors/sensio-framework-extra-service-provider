@@ -101,14 +101,15 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
         $app['sensio_framework_extra.converter.manager'] = $app->share(function (Application $app) {
             $manager = new ParamConverterManager();
             $manager->add($app['sensio_framework_extra.converter.datetime']);
-            $manager->add($app['sensio_framework_extra.converter.doctrine.orm']);
+
+            if (isset($app['doctrine'])) {
+                $manager->add($app['sensio_framework_extra.converter.doctrine.orm']);
+            }
+            
             return $manager;
         });
 
         $app['sensio_framework_extra.converter.doctrine.orm'] = $app->share(function (Application $app) {
-            if (!isset($app['doctrine'])) {
-                return;
-            }
             return new DoctrineParamConverter($app['doctrine']);
         });
 
