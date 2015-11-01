@@ -1,5 +1,5 @@
 <?php
-namespace Inbep\Silex\Templating;
+namespace Sergiors\Silex\Templating;
 
 use Symfony\Component\Templating\TemplateReference as BaseTemplateReference;
 

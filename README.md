@@ -7,14 +7,16 @@ To see the complete documentation, check out [SensioFrameworkExtraBundle](http:/
 Install
 -------
 ```bash
-composer require inbep/sensio-framework-extra-service-provider
+composer require sergiors/sensio-framework-extra-service-provider
 ```
 
 ```php
-use Inbep\Silex\Provider\RoutingServiceProvider;
-use Inbep\Silex\Provider\AnnotationServiceProvider;
+use Sergiors\Silex\Provider\RoutingServiceProvider;
+use Sergiors\Silex\Provider\DoctrineCacheServiceProvider;
+use Sergiors\Silex\Provider\AnnotationServiceProvider;
 
 $app->register(new RoutingServiceProvider());
+$app->register(new DoctrineCacheServiceProvider());
 $app->register(new AnnotationServiceProvider());
 $app->register(new SensioFrameworkExtraServiceProvider());
 ```

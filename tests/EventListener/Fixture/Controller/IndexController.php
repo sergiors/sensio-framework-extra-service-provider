@@ -1,5 +1,5 @@
 <?php
-namespace Inbep\Silex\EventListener\Fixture\Controller;
+namespace Sergiors\Silex\EventListener\Fixture\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 

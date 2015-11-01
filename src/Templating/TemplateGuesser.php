@@ -1,7 +1,6 @@
 <?php
-namespace Inbep\Silex\Templating;
+namespace Sergiors\Silex\Templating;
 
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Util\ClassUtils;
 use Silex\Application;

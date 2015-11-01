@@ -1,9 +1,9 @@
 <?php
-namespace Inbep\Silex;
+namespace Sergiors\Silex;
 
-use Inbep\Silex\Templating\TemplateGuesser;
+use Sergiors\Silex\Templating\TemplateGuesser;
 use Symfony\Component\HttpFoundation\Request;
-use Inbep\Silex\Templating\Fixture\Controller\IndexController;
+use Sergiors\Silex\Templating\Fixture\Controller\IndexController;
 
 class TemplateGuesserTest extends \PHPUnit_Framework_TestCase
 {

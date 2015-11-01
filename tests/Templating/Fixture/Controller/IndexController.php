@@ -1,5 +1,5 @@
 <?php
-namespace Inbep\Silex\Templating\Fixture\Controller;
+namespace Sergiors\Silex\Templating\Fixture\Controller;
 
 class IndexController
 {

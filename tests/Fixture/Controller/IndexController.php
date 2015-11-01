@@ -1,5 +1,5 @@
 <?php
-namespace Inbep\Silex\Fixture\Controller;
+namespace Sergiors\Silex\Fixture\Controller;
 
 use Silex\Application;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

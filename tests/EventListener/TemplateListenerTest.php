@@ -1,14 +1,14 @@
 <?php
-namespace Inbep\Silex\EventListener;
+namespace Sergiors\Silex\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Inbep\Silex\EventListener\TemplateListener;
-use Inbep\Silex\Templating\TemplateGuesser;
-use Inbep\Silex\EventListener\Fixture\Controller\IndexController;
+use Sergiors\Silex\EventListener\TemplateListener;
+use Sergiors\Silex\Templating\TemplateGuesser;
+use Sergiors\Silex\EventListener\Fixture\Controller\IndexController;
 
 class TemplateListenerTest extends \PHPUnit_Framework_TestCase
 {

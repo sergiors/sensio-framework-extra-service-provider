@@ -1,5 +1,5 @@
 <?php
-namespace Inbep\Silex\EventListener;
+namespace Sergiors\Silex\EventListener;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;

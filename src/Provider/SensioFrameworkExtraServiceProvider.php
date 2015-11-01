@@ -1,5 +1,5 @@
 <?php
-namespace Inbep\Silex\Provider;
+namespace Sergiors\Silex\Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -17,8 +17,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Security\ExpressionLanguage;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterManager;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DateTimeParamConverter;
-use Inbep\Silex\Templating\TemplateGuesser;
-use Inbep\Silex\EventListener\TemplateListener;
+use Sergiors\Silex\Templating\TemplateGuesser;
+use Sergiors\Silex\EventListener\TemplateListener;
 
 /**
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>

@@ -1,5 +1,5 @@
 <?php
-namespace Inbep\Silex\Provider;
+namespace Sergiors\Silex\Provider;
 
 use Silex\Application;
 use Silex\WebTestCase;
@@ -34,6 +34,7 @@ class SensioFrameworkExtraServiceProviderTest extends WebTestCase
                 'resource' => __DIR__.'/../Fixture/routing.yml'
             ]
         ]);
+        $app->register(new DoctrineCacheServiceProvider());
         $app->register(new AnnotationServiceProvider());
         $app->register(new SensioFrameworkExtraServiceProvider());
 
