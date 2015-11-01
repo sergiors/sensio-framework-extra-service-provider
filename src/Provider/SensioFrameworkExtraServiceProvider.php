@@ -105,7 +105,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
             if (isset($app['doctrine'])) {
                 $manager->add($app['sensio_framework_extra.converter.doctrine.orm']);
             }
-            
+
             return $manager;
         });
 

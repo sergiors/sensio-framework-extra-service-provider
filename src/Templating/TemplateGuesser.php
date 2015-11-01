@@ -3,11 +3,11 @@ namespace Sergiors\Silex\Templating;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Util\ClassUtils;
-use Silex\Application;
 
 /**
  * The TemplateGuesser class handles the guessing of template name based on controller.
  *
+ * @author Fabien Potencier <fabien@symfony.com>
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
 class TemplateGuesser

@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
+ * @author Fabien Potencier <fabien@symfony.com>
  * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
 class TemplateListener implements EventSubscriberInterface
