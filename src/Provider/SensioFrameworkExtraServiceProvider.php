@@ -12,11 +12,11 @@ use Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener;
-use Sensio\Bundle\FrameworkExtraBundle\Routing\AnnotatedRouteControllerLoader;
 use Sensio\Bundle\FrameworkExtraBundle\Security\ExpressionLanguage;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterManager;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DateTimeParamConverter;
+use Sergiors\Silex\Routing\AnnotatedRouteControllerLoader;
 use Sergiors\Silex\Templating\TemplateGuesser;
 use Sergiors\Silex\EventListener\TemplateListener;
 
