@@ -3,6 +3,7 @@ namespace Sergiors\Silex\EventListener;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,6 +21,11 @@ class TemplateListener implements EventSubscriberInterface
     protected $container;
 
     /**
+     * @var bool
+     */
+    protected $thrown = false;
+
+    /**
      * Constructor.
      *
      * @param \Pimple $container The service container instance
@@ -27,6 +33,14 @@ class TemplateListener implements EventSubscriberInterface
     public function __construct(\Pimple $container)
     {
         $this->container = $container;
+    }
+
+    /**
+     * @param GetResponseForExceptionEvent $event
+     */
+    public function onKernelException(GetResponseForExceptionEvent $event)
+    {
+        $this->thrown = true;
     }
 
     /**
@@ -80,6 +94,10 @@ class TemplateListener implements EventSubscriberInterface
      */
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
+        if ($this->thrown) {
+            return;
+        }
+
         $request = $event->getRequest();
         $parameters = $event->getControllerResult();
 
@@ -115,13 +133,13 @@ class TemplateListener implements EventSubscriberInterface
             };
             $event->setResponse(new StreamedResponse($callback));
         }
-
     }
 
     public static function getSubscribedEvents()
     {
         return [
             KernelEvents::CONTROLLER => ['onKernelController', -128],
+            KernelEvents::EXCEPTION => 'onKernelException',
             KernelEvents::VIEW => 'onKernelView',
         ];
     }
