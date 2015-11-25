@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Security\ExpressionLanguage;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterManager;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DateTimeParamConverter;
-use Sergiors\Silex\Routing\AnnotatedRouteControllerLoader;
+use Sensio\Bundle\FrameworkExtraBundle\Routing\AnnotatedRouteControllerLoader;
 use Sergiors\Silex\Templating\TemplateGuesser;
 use Sergiors\Silex\EventListener\TemplateListener;
 
@@ -94,7 +94,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
             return new ExpressionLanguage();
         });
 
-        $app['sensio_framework_extra.view.guesser'] = $app->share(function (Application $app) {
+        $app['sensio_framework_extra.view.guesser'] = $app->share(function () {
             return new TemplateGuesser();
         });
 
