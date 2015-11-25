@@ -6,7 +6,6 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sergiors\Silex\EventListener\TemplateListener;
 use Sergiors\Silex\Templating\TemplateGuesser;
 use Sergiors\Silex\EventListener\Fixture\Controller\IndexController;
 

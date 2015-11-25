@@ -2,6 +2,7 @@
 namespace Sergiors\Silex\EventListener\Fixture\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class IndexController
 {
@@ -10,5 +11,13 @@ class IndexController
      */
     public function indexAction()
     {
+    }
+
+    /**
+     * @Template(engine="twig")
+     */
+    public function fooAction()
+    {
+        throw new NotFoundHttpException();
     }
 }
