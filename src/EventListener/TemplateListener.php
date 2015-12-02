@@ -83,19 +83,6 @@ class TemplateListener implements EventSubscriberInterface
         $request = $event->getRequest();
         $parameters = $event->getControllerResult();
 
-        if (null === $parameters) {
-            if (!$vars = $request->attributes->get('_template_vars')) {
-                if (!$vars = $request->attributes->get('_template_default_vars')) {
-                    return;
-                }
-            }
-
-            $parameters = [];
-            foreach ($vars as $var) {
-                $parameters[$var] = $request->attributes->get($var);
-            }
-        }
-
         if (!is_array($parameters)) {
             return $parameters;
         }
