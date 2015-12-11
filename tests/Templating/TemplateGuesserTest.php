@@ -12,7 +12,7 @@ class TemplateGuesserTest extends \PHPUnit_Framework_TestCase
      *
      * @expectedException \InvalidArgumentException
      *
-     * @covers Inbep\Silex\Templating\TemplateGuesser::guessTemplateName
+     * @covers Sergiors\Silex\Templating\TemplateGuesser::guessTemplateName
      */
     public function shouldInvalidArgumentException()
     {
@@ -26,10 +26,10 @@ class TemplateGuesserTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      *
-     * @covers Inbep\Silex\Templating\TemplateGuesser::guessTemplateName
+     * @covers Sergiors\Silex\Templating\TemplateGuesser::guessTemplateName
      *
-     * @uses Inbep\Silex\Templating\Fixture\Controller\IndexController
-     * @uses Inbep\Silex\Templating\TemplateReference
+     * @uses Sergiors\Silex\Templating\Fixture\Controller\IndexController
+     * @uses Sergiors\Silex\Templating\TemplateReference
      */
     public function guessTemplateName()
     {

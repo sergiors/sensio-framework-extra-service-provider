@@ -11,6 +11,12 @@ use Sergiors\Silex\EventListener\Fixture\Controller\IndexController;
 
 class TemplateListenerTest extends \PHPUnit_Framework_TestCase
 {
+    protected $container;
+
+    protected $listener;
+
+    protected $request;
+
     public function setUp()
     {
         $this->container = new \Pimple();
@@ -26,17 +32,17 @@ class TemplateListenerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      *
-     * @covers Inbep\Silex\EventListener\TemplateListener::onKernelController
+     * @covers Sergiors\Silex\EventListener\TemplateListener::onKernelController
      *
-     * @uses Inbep\Silex\EventListener\TemplateListener::__construct
-     * @uses Inbep\Silex\Templating\TemplateGuesser
-     * @uses Inbep\Silex\Templating\TemplateReference
+     * @uses Sergiors\Silex\EventListener\TemplateListener::__construct
+     * @uses Sergiors\Silex\Templating\TemplateGuesser
+     * @uses Sergiors\Silex\Templating\TemplateReference
      */
     public function shouldReturnViewPath()
     {
         $controller = new IndexController();
-        $this->event = $this->getFilterControllerEvent([$controller, 'indexAction'], $this->request);
-        $this->listener->onKernelController($this->event);
+        $event = $this->getFilterControllerEvent([$controller, 'indexAction'], $this->request);
+        $this->listener->onKernelController($event);
         $this->assertEquals('Index/index.html.twig', (string) $this->request->attributes->get('_template'));
     }
 

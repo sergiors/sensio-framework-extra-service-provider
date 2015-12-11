@@ -13,7 +13,7 @@ class SensioFrameworkExtraServiceProviderTest extends WebTestCase
      *
      * @expectedException \LogicException
      *
-     * @covers Inbep\Silex\Provider\SensioFrameworkExtraServiceProvider::register
+     * @covers Sergiors\Silex\Provider\SensioFrameworkExtraServiceProvider::register
      */
     public function shouldReturnLogicException()
     {
@@ -24,7 +24,7 @@ class SensioFrameworkExtraServiceProviderTest extends WebTestCase
     /**
      * @test
      *
-     * @covers Inbep\Silex\Provider\SensioFrameworkExtraServiceProvider::register
+     * @covers Sergiors\Silex\Provider\SensioFrameworkExtraServiceProvider::register
      */
     public function register()
     {
