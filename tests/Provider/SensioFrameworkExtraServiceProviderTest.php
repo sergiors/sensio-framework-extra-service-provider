@@ -35,7 +35,7 @@ class SensioFrameworkExtraServiceProviderTest extends WebTestCase
             ]
         ]);
         $app->register(new DoctrineCacheServiceProvider());
-        $app->register(new AnnotationServiceProvider());
+        $app->register(new AnnotationsServiceProvider());
         $app->register(new SensioFrameworkExtraServiceProvider());
 
         $this->assertInstanceOf(ControllerListener::class, $app['sensio_framework_extra.controller.listener']);
