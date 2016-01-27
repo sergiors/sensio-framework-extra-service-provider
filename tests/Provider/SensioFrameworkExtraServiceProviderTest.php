@@ -30,11 +30,7 @@ class SensioFrameworkExtraServiceProviderTest extends WebTestCase
     public function register()
     {
         $app = $this->createApplication();
-        $app->register(new RoutingServiceProvider(), [
-            'router' => [
-                'resource' => __DIR__.'/../Fixture/routing.yml'
-            ]
-        ]);
+        $app->register(new RoutingServiceProvider());
         $app->register(new DoctrineCacheServiceProvider());
         $app->register(new AnnotationsServiceProvider());
         $app->register(new SensioFrameworkExtraServiceProvider());
