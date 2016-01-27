@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Silex\EventListener;
 
 use Symfony\Component\HttpFoundation\Response;

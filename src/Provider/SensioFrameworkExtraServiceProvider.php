@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Silex\Provider;
 
 use Silex\Application;
@@ -122,6 +123,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
                 $resolver->addLoader($app['sensio_framework_extra.routing.loader.annot_dir']);
                 $resolver->addLoader($app['sensio_framework_extra.routing.loader.annot_file']);
                 $resolver->addLoader($app['sensio_framework_extra.routing.loader.annot_class']);
+
                 return $resolver;
             })
         );

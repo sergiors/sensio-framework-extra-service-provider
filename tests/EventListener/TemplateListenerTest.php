@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Silex\EventListener;
 
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -25,7 +26,7 @@ class TemplateListenerTest extends \PHPUnit_Framework_TestCase
         });
         $this->listener = new TemplateListener($this->container);
         $this->request = new Request([], [], [
-            '_template' => new Template([])
+            '_template' => new Template([]),
         ]);
     }
 

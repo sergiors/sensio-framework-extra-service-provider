@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Silex\Templating;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,7 @@ class TemplateGuesser
                 )
             );
         }
-        
+
         if (!preg_match('/^(.+)Action$/', $controller[1], $matchAction)) {
             throw new \InvalidArgumentException(
                 sprintf(

@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Silex;
 
 use Sergiors\Silex\Templating\TemplateGuesser;
@@ -19,7 +20,7 @@ class TemplateGuesserTest extends \PHPUnit_Framework_TestCase
         $template = new TemplateGuesser();
         $template->guessTemplateName([
             new IndexController(),
-            'index'
+            'index',
         ], new Request());
     }
 
@@ -36,7 +37,7 @@ class TemplateGuesserTest extends \PHPUnit_Framework_TestCase
         $template = new TemplateGuesser();
         $reference = $template->guessTemplateName([
             new IndexController(),
-            'indexAction'
+            'indexAction',
         ], new Request());
 
         $this->assertEquals('Index/index.html.twig', (string) $reference);
