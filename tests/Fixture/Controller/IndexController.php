@@ -1,6 +1,6 @@
 <?php
 
-namespace Sergiors\Silex\Fixture\Controller;
+namespace Sergiors\Silex\Tests\Fixture\Controller;
 
 use Silex\Application;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

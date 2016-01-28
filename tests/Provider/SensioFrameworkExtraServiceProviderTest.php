@@ -1,11 +1,15 @@
 <?php
 
-namespace Sergiors\Silex\Provider;
+namespace Sergiors\Silex\Tests\Provider;
 
 use Silex\Application;
 use Silex\WebTestCase;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener;
 use Sensio\Bundle\FrameworkExtraBundle\Routing\AnnotatedRouteControllerLoader;
+use Sergiors\Silex\Provider\SensioFrameworkExtraServiceProvider;
+use Sergiors\Silex\Provider\RoutingServiceProvider;
+use Sergiors\Silex\Provider\DoctrineCacheServiceProvider;
+use Sergiors\Silex\Provider\AnnotationsServiceProvider;
 
 class SensioFrameworkExtraServiceProviderTest extends WebTestCase
 {

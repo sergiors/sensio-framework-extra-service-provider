@@ -1,10 +1,10 @@
 <?php
 
-namespace Sergiors\Silex;
+namespace Sergiors\Silex\Tests;
 
 use Sergiors\Silex\Templating\TemplateGuesser;
 use Symfony\Component\HttpFoundation\Request;
-use Sergiors\Silex\Templating\Fixture\Controller\IndexController;
+use Sergiors\Silex\Tests\Templating\Fixture\Controller\IndexController;
 
 class TemplateGuesserTest extends \PHPUnit_Framework_TestCase
 {
