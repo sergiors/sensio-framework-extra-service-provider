@@ -54,13 +54,13 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
 
         $app['sensio_framework_extra.routing.loader.annot_class'] = $app->share(
             function ($app) {
-                return new AnnotatedRouteControllerLoader($app['annotation_reader']);
+                return new AnnotatedRouteControllerLoader($app['annotations']);
             }
         );
 
         $app['sensio_framework_extra.controller.listener'] = $app->share(
             function (Application $app) {
-                return new ControllerListener($app['annotation_reader']);
+                return new ControllerListener($app['annotations']);
             }
         );
 
