@@ -34,6 +34,12 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
             );
         }
 
+        if (!isset($app['annotations'])) {
+            throw new \LogicException(
+                'You must register the AnnotationsServiceProvider to use the SensioFrameworkExtraServiceProvider.'
+            );
+        }
+
         $app['sensio_framework_extra.routing.loader.annot_dir'] = $app->share(
             function (Application $app) {
                 return new AnnotationDirectoryLoader(
