@@ -101,6 +101,10 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
             $manager = new ParamConverterManager();
             $manager->add($app['sensio_framework_extra.converter.datetime']);
 
+            if (class_exists('Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface')) {
+                $manager->add($app['sensio_framework_extra.psr7.converter.server_request']);
+            }
+
             if (isset($app['doctrine'])) {
                 $manager->add($app['sensio_framework_extra.converter.doctrine.orm']);
             }
