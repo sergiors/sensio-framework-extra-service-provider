@@ -149,7 +149,10 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.converter.listener']);
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.cache.listener']);
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.view.listener']);
-        $app['dispatcher']->addSubscriber($app['sensio_framework_extra.psr7.listener.response']);
+
+        if (class_exists('Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface')) {
+            $app['dispatcher']->addSubscriber($app['sensio_framework_extra.psr7.listener.response']);
+        }
 
         if (isset($app['security'])) {
             $app['dispatcher']->addSubscriber($app['sensio_framework_extra.security.listener']);
