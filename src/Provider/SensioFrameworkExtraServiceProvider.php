@@ -101,7 +101,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
             $manager = new ParamConverterManager();
             $manager->add($app['sensio_framework_extra.converter.datetime']);
 
-            if (class_exists('Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface')) {
+            if (class_exists('Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory')) {
                 $manager->add($app['sensio_framework_extra.psr7.converter.server_request']);
             }
 
@@ -154,7 +154,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.cache.listener']);
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.view.listener']);
 
-        if (class_exists('Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface')) {
+        if (class_exists('Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory')) {
             $app['dispatcher']->addSubscriber($app['sensio_framework_extra.psr7.listener.response']);
         }
 
