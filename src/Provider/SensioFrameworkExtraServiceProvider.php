@@ -9,14 +9,18 @@ use Symfony\Component\Routing\Loader\AnnotationDirectoryLoader;
 use Symfony\Component\Routing\Loader\AnnotationFileLoader;
 use Symfony\Component\Security\Core\Role\RoleHierarchy;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
+use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
+use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener;
+use Sensio\Bundle\FrameworkExtraBundle\EventListener\PsrResponseListener;
 use Sensio\Bundle\FrameworkExtraBundle\Security\ExpressionLanguage;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterManager;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DateTimeParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\PsrServerRequestParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Routing\AnnotatedRouteControllerLoader;
 use Sergiors\Silex\Templating\TemplateGuesser;
 use Sergiors\Silex\EventListener\TemplateListener;
@@ -40,58 +44,46 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
             );
         }
 
-        $app['sensio_framework_extra.routing.loader.annot_dir'] = $app->share(
-            function (Application $app) {
-                return new AnnotationDirectoryLoader(
-                    new FileLocator(),
-                    $app['sensio_framework_extra.routing.loader.annot_class']
-                );
-            }
-        );
+        $app['sensio_framework_extra.routing.loader.annot_dir'] = $app->share(function (Application $app) {
+            return new AnnotationDirectoryLoader(
+                new FileLocator(),
+                $app['sensio_framework_extra.routing.loader.annot_class']
+            );
+        });
 
-        $app['sensio_framework_extra.routing.loader.annot_file'] = $app->share(
-            function (Application $app) {
-                return new AnnotationFileLoader(
-                    new FileLocator(),
-                    $app['sensio_framework_extra.routing.loader.annot_class']
-                );
-            }
-        );
+        $app['sensio_framework_extra.routing.loader.annot_file'] = $app->share(function (Application $app) {
+            return new AnnotationFileLoader(
+                new FileLocator(),
+                $app['sensio_framework_extra.routing.loader.annot_class']
+            );
+        });
 
-        $app['sensio_framework_extra.routing.loader.annot_class'] = $app->share(
-            function ($app) {
-                return new AnnotatedRouteControllerLoader($app['annotations']);
-            }
-        );
+        $app['sensio_framework_extra.routing.loader.annot_class'] = $app->share(function ($app) {
+            return new AnnotatedRouteControllerLoader($app['annotations']);
+        });
 
-        $app['sensio_framework_extra.controller.listener'] = $app->share(
-            function (Application $app) {
-                return new ControllerListener($app['annotations']);
-            }
-        );
+        $app['sensio_framework_extra.controller.listener'] = $app->share(function (Application $app) {
+            return new ControllerListener($app['annotations']);
+        });
 
         $app['sensio_framework_extra.cache.listener'] = $app->share(function () {
             return new HttpCacheListener();
         });
 
-        $app['sensio_framework_extra.security.listener'] = $app->share(
-            function (Application $app) {
-                return new SecurityListener(
-                    $app['security'],
-                    $app['sensio_framework_extra.security.expression_language'],
-                    $app['security.trust_resolver'],
-                    new RoleHierarchy($app['security.role_hierarchy']),
-                    $app['security.token_storage'],
-                    $app['security.authorization_checker']
-                );
-            }
-        );
+        $app['sensio_framework_extra.security.listener'] = $app->share(function (Application $app) {
+            return new SecurityListener(
+                $app['security'],
+                $app['sensio_framework_extra.security.expression_language'],
+                $app['security.trust_resolver'],
+                new RoleHierarchy($app['security.role_hierarchy']),
+                $app['security.token_storage'],
+                $app['security.authorization_checker']
+            );
+        });
 
-        $app['sensio_framework_extra.view.listener'] = $app->share(
-            function (Application $app) {
-                return new TemplateListener($app);
-            }
-        );
+        $app['sensio_framework_extra.view.listener'] = $app->share(function (Application $app) {
+            return new TemplateListener($app);
+        });
 
         $app['sensio_framework_extra.converter.listener'] = $app->share(function (Application $app) {
             return new ParamConverterListener($app['sensio_framework_extra.converter.manager'], true);
@@ -116,12 +108,28 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
             return $manager;
         });
 
+        $app['sensio_framework_extra.psr7.http_message_factory'] = $app->share(function () {
+            return new DiactorosFactory();
+        });
+
+        $app['sensio_framework_extra.psr7.http_foundation_factory'] = $app->share(function () {
+            return new HttpFoundationFactory();
+        });
+
+        $app['sensio_framework_extra.psr7.listener.response'] = $app->share(function (Application $app) {
+            return new PsrResponseListener($app['sensio_framework_extra.psr7.http_foundation_factory']);
+        });
+
         $app['sensio_framework_extra.converter.doctrine.orm'] = $app->share(function (Application $app) {
             return new DoctrineParamConverter($app['doctrine']);
         });
 
         $app['sensio_framework_extra.converter.datetime'] = $app->share(function () {
             return new DateTimeParamConverter();
+        });
+
+        $app['sensio_framework_extra.psr7.converter.server_request'] = $app->share(function (Application $app) {
+            return new PsrServerRequestParamConverter($app['sensio_framework_extra.psr7.http_message_factory']);
         });
 
         $app['routing.resolver'] = $app->share(
@@ -141,6 +149,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.converter.listener']);
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.cache.listener']);
         $app['dispatcher']->addSubscriber($app['sensio_framework_extra.view.listener']);
+        $app['dispatcher']->addSubscriber($app['sensio_framework_extra.psr7.listener.response']);
 
         if (isset($app['security'])) {
             $app['dispatcher']->addSubscriber($app['sensio_framework_extra.security.listener']);
