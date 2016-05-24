@@ -14,7 +14,7 @@
         "sensio/framework-extra-bundle": "^3.0",
         "symfony/expression-language": "^2.7|~3.0",
         "sergiors/templating-service-provider": "~1",
-        "sergiors/routing-service-provider": "dev-master",
+        "sergiors/routing-service-provider": "1.x-dev",
         "sergiors/annotations-service-provider": "dev-master"
     },
     "require-dev": {
