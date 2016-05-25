@@ -2,6 +2,7 @@
 
 namespace Sergiors\Silex\EventListener;
 
+use Pimple\Container;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
@@ -16,16 +17,16 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class TemplateListener implements EventSubscriberInterface
 {
     /**
-     * @var \Pimple
+     * @var Container
      */
     protected $container;
 
     /**
      * Constructor.
      *
-     * @param \Pimple $container The service container instance
+     * @param Container $container The service container instance
      */
-    public function __construct(\Pimple $container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
     }

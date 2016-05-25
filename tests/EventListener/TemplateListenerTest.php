@@ -2,6 +2,7 @@
 
 namespace Sergiors\Silex\Tests\EventListener;
 
+use Pimple\Container;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -21,10 +22,10 @@ class TemplateListenerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->container = new \Pimple();
-        $this->container['sensio_framework_extra.view.guesser'] = $this->container->share(function () {
+        $this->container = new Container();
+        $this->container['sensio_framework_extra.view.guesser'] = function () {
             return new TemplateGuesser();
-        });
+        };
         $this->listener = new TemplateListener($this->container);
         $this->request = new Request([], [], [
             '_template' => new Template([]),

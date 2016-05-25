@@ -10,11 +10,11 @@
     ],
     "require": {
         "php": ">=5.5",
-        "silex/silex": "^1.3",
+        "silex/silex": "^2",
         "sensio/framework-extra-bundle": "^3.0",
-        "symfony/expression-language": "^2.7|~3.0",
-        "sergiors/templating-service-provider": "~1",
-        "sergiors/routing-service-provider": "1.x-dev",
+        "symfony/expression-language": "^2.8|^3.0",
+        "sergiors/templating-service-provider": "^2",
+        "sergiors/routing-service-provider": "dev-master",
         "sergiors/annotations-service-provider": "dev-master"
     },
     "require-dev": {
