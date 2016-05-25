@@ -15,7 +15,7 @@
         "symfony/expression-language": "^2.7|~3.0",
         "sergiors/templating-service-provider": "~1",
         "sergiors/routing-service-provider": "1.x-dev",
-        "sergiors/annotations-service-provider": "dev-master"
+        "sergiors/annotations-service-provider": "1.x-dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8",
