@@ -34,7 +34,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, B
 {
     public function register(Container $app)
     {
-        if (!isset($app['routing.resolver'])) {
+        if (!isset($app['routing.loader.resolver'])) {
             throw new \LogicException(
                 'You must register the RoutingServiceProvider to use the SensioFrameworkExtraServiceProvider.'
             );
@@ -138,7 +138,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, B
             return new PsrServerRequestParamConverter($app['sensio_framework_extra.psr7.http_message_factory']);
         };
 
-        $app['routing.resolver'] = $app->extend('routing.resolver', function (LoaderResolverInterface $resolver) use ($app) {
+        $app['routing.loader.resolver'] = $app->extend('routing.loader.resolver', function (LoaderResolverInterface $resolver) use ($app) {
             $resolver->addLoader($app['sensio_framework_extra.routing.loader.annot_dir']);
             $resolver->addLoader($app['sensio_framework_extra.routing.loader.annot_file']);
             $resolver->addLoader($app['sensio_framework_extra.routing.loader.annot_class']);
