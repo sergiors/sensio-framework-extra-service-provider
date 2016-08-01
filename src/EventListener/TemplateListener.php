@@ -65,10 +65,9 @@ class TemplateListener implements EventSubscriberInterface
         if (!$configuration->getVars()) {
             $r = new \ReflectionObject($controller[0]);
 
-            $vars = array();
-            foreach ($r->getMethod($controller[1])->getParameters() as $param) {
-                $vars[] = $param->getName();
-            }
+            $vars = array_map(function ($param) {
+                return $param->getName();
+            }, $r->getMethod($controller[1])->getParameters());
 
             $request->attributes->set('_template_default_vars', $vars);
         }
@@ -98,12 +97,13 @@ class TemplateListener implements EventSubscriberInterface
         if (!$request->attributes->get('_template_streamable')) {
             $response = new Response($templating->render($template, $parameters));
             $event->setResponse($response);
-        } else {
-            $callback = function () use ($templating, $template, $parameters) {
-                return $templating->stream($template, $parameters);
-            };
-            $event->setResponse(new StreamedResponse($callback));
+            return;
         }
+
+        $callback = function () use ($templating, $template, $parameters) {
+            return $templating->stream($template, $parameters);
+        };
+        $event->setResponse(new StreamedResponse($callback));
     }
 
     public static function getSubscribedEvents()
