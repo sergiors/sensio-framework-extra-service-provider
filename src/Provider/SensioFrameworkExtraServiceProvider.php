@@ -75,7 +75,7 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, E
 
         $app['sensio_framework_extra.security.listener'] = function (Container $app) {
             return new SecurityListener(
-                $app['security'],
+                null,
                 $app['sensio_framework_extra.security.expression_language'],
                 $app['security.trust_resolver'],
                 new RoleHierarchy($app['security.role_hierarchy']),
@@ -156,13 +156,10 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, E
         $dispatcher->addSubscriber($app['sensio_framework_extra.converter.listener']);
         $dispatcher->addSubscriber($app['sensio_framework_extra.cache.listener']);
         $dispatcher->addSubscriber($app['sensio_framework_extra.view.listener']);
+        $dispatcher->addSubscriber($app['sensio_framework_extra.security.listener']);
 
         if (class_exists('Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory')) {
             $dispatcher->addSubscriber($app['sensio_framework_extra.psr7.listener.response']);
-        }
-
-        if (isset($app['security'])) {
-            $dispatcher->addSubscriber($app['sensio_framework_extra.security.listener']);
         }
     }
 }
