@@ -77,10 +77,10 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, E
             return new SecurityListener(
                 null,
                 $app['sensio_framework_extra.security.expression_language'],
-                $app['security.trust_resolver'],
-                new RoleHierarchy($app['security.role_hierarchy']),
-                $app['security.token_storage'],
-                $app['security.authorization_checker']
+                isset($app['security.trust_resolver']) ? $app['security.trust_resolver'] : null,
+                isset($app['security.role_hierarchy']) ? new RoleHierarchy($app['security.role_hierarchy']) : null,
+                isset($app['security.token_storage']) ? $app['security.token_storage'] : null,
+                isset($app['security.authorization_checker']) ? $app['security.authorization_checker'] : null
             );
         };
 
