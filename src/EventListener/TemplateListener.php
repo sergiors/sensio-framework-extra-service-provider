@@ -2,7 +2,6 @@
 
 namespace Sergiors\Silex\EventListener;
 
-use Pimple\Container;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
@@ -87,6 +86,8 @@ class TemplateListener implements EventSubscriberInterface
      * rendered template content.
      *
      * @param GetResponseForControllerResultEvent $event A GetResponseForControllerResultEvent instance
+     *
+     * @return null|mixed
      */
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
@@ -101,18 +102,20 @@ class TemplateListener implements EventSubscriberInterface
             return $parameters;
         }
 
-        $templating = $this->engine;
-
         if (!$request->attributes->get('_template_streamable')) {
-            $response = new Response($templating->render($template, $parameters));
+            $response = new Response($this->engine->render($template, $parameters));
             $event->setResponse($response);
             return;
         }
 
-        $callback = function () use ($templating, $template, $parameters) {
-            return $templating->stream($template, $parameters);
-        };
-        $event->setResponse(new StreamedResponse($callback));
+        // attempt to render the actual response
+        if ($template->isStreamable()) {
+            $event->setResponse(new StreamedResponse(function () use ($template, $parameters) {
+                return $this->engine->stream($template, $parameters);
+            }));
+        }
+
+        $event->setResponse(new Response($this->engine->render($template->getTemplate(), $parameters)));
     }
 
     public static function getSubscribedEvents()
