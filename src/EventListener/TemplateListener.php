@@ -9,26 +9,36 @@ use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\Templating\EngineInterface;
+use Sergiors\Silex\Templating\TemplateGuesser;
 
 /**
+ * Based on Symfony Templating.
+ * 
  * @author Fabien Potencier <fabien@symfony.com>
- * @author Sérgio Rafael Siqueira <sergio@inbep.com.br>
  */
 class TemplateListener implements EventSubscriberInterface
 {
     /**
-     * @var Container
+     * @var EngineInterface
      */
-    protected $container;
+    protected $engine;
+
+    /**
+     * @var TemplateGuesser
+     */
+    protected $guesser;
 
     /**
      * Constructor.
      *
-     * @param Container $container The service container instance
+     * @param EngineInterface $engine
+     * @param TemplateGuesser $guesser
      */
-    public function __construct(Container $container)
+    public function __construct(EngineInterface $engine, TemplateGuesser $guesser)
     {
-        $this->container = $container;
+        $this->engine = $engine;
+        $this->guesser = $guesser;
     }
 
     /**
@@ -50,8 +60,7 @@ class TemplateListener implements EventSubscriberInterface
         }
 
         if (!$configuration->getTemplate()) {
-            $guesser = $this->container['sensio_framework_extra.view.guesser'];
-            $configuration->setTemplate($guesser->guessTemplateName(
+            $configuration->setTemplate($this->guesser->guessTemplateName(
                 $controller,
                 $request,
                 $configuration->getEngine()
@@ -92,7 +101,7 @@ class TemplateListener implements EventSubscriberInterface
             return $parameters;
         }
 
-        $templating = $this->container['templating'];
+        $templating = $this->engine;
 
         if (!$request->attributes->get('_template_streamable')) {
             $response = new Response($templating->render($template, $parameters));

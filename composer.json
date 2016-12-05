@@ -18,6 +18,7 @@
         "sergiors/annotations-service-provider": "dev-master"
     },
     "require-dev": {
+        "symfony/security": "^2.8|^3.0",
         "phpunit/phpunit": "~4.8",
         "pdepend/pdepend": "~2.0",
         "phing/phing": "~2.10",

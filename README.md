@@ -14,10 +14,12 @@ composer require sergiors/sensio-framework-extra-service-provider "dev-master"
 use Sergiors\Silex\Provider\RoutingServiceProvider;
 use Sergiors\Silex\Provider\DoctrineCacheServiceProvider;
 use Sergiors\Silex\Provider\AnnotationsServiceProvider;
+use Sergiors\Silex\Provider\TemplatingServiceProvider;
 use Sergiors\Silex\Provider\SensioFrameworkExtraServiceProvider;
 
 $app->register(new RoutingServiceProvider());
 $app->register(new DoctrineCacheServiceProvider());
+$app->register(new TemplatingServiceProvider());
 $app->register(new AnnotationsServiceProvider());
 $app->register(new SensioFrameworkExtraServiceProvider());
 ```

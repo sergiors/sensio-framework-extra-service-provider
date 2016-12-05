@@ -46,6 +46,12 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, E
             );
         }
 
+        if (!isset($app['templating'])) {
+            throw new \LogicException(
+                'You must register the TemplatingServiceProvider to use the SensioFrameworkExtraServiceProvider.'
+            );
+        }
+
         $app['sensio_framework_extra.routing.loader.annot_dir'] = function (Container $app) {
             return new AnnotationDirectoryLoader(
                 new FileLocator(),
@@ -74,18 +80,22 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, E
         };
 
         $app['sensio_framework_extra.security.listener'] = function (Container $app) {
+            $getOr = function ($name, $notfound = null) use ($app) {
+                return isset($app[$name]) ? $app[$name] : $notfound;
+            };
+
             return new SecurityListener(
                 null,
                 $app['sensio_framework_extra.security.expression_language'],
-                isset($app['security.trust_resolver']) ? $app['security.trust_resolver'] : null,
-                isset($app['security.role_hierarchy']) ? new RoleHierarchy($app['security.role_hierarchy']) : null,
-                isset($app['security.token_storage']) ? $app['security.token_storage'] : null,
-                isset($app['security.authorization_checker']) ? $app['security.authorization_checker'] : null
+                $getOr('security.trust_resolver'),
+                new RoleHierarchy($getOr('security.role_hierarchy', [])),
+                $getOr('security.token_storage'),
+                $getOr('security.authorization_checker')
             );
         };
 
         $app['sensio_framework_extra.view.listener'] = function (Container $app) {
-            return new TemplateListener($app);
+            return new TemplateListener($app['templating'], new TemplateGuesser());
         };
 
         $app['sensio_framework_extra.converter.listener'] = function (Container $app) {
@@ -98,10 +108,6 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, E
 
         $app['sensio_framework_extra.security.expression_language'] = function () {
             return new ExpressionLanguage();
-        };
-
-        $app['sensio_framework_extra.view.guesser'] = function () {
-            return new TemplateGuesser();
         };
 
         $app['sensio_framework_extra.converter.manager'] = function (Container $app) {

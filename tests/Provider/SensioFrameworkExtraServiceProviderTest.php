@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Routing\AnnotatedRouteControllerLoader;
 use Sergiors\Silex\Provider\SensioFrameworkExtraServiceProvider;
 use Sergiors\Silex\Provider\RoutingServiceProvider;
 use Sergiors\Silex\Provider\DoctrineCacheServiceProvider;
+use Sergiors\Silex\Provider\TemplatingServiceProvider;
 use Sergiors\Silex\Provider\AnnotationsServiceProvider;
 
 class SensioFrameworkExtraServiceProviderTest extends WebTestCase
@@ -36,6 +37,7 @@ class SensioFrameworkExtraServiceProviderTest extends WebTestCase
         $app = $this->createApplication();
         $app->register(new RoutingServiceProvider());
         $app->register(new DoctrineCacheServiceProvider());
+        $app->register(new TemplatingServiceProvider());
         $app->register(new AnnotationsServiceProvider());
         $app->register(new SensioFrameworkExtraServiceProvider());
 

@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sergiors\Silex\Provider\TemplatingServiceProvider;
 use Sergiors\Silex\Templating\TemplateGuesser;
 use Sergiors\Silex\Tests\EventListener\Fixture\Controller\IndexController;
 use Sergiors\Silex\EventListener\TemplateListener;
@@ -23,10 +24,8 @@ class TemplateListenerTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->container = new Container();
-        $this->container['sensio_framework_extra.view.guesser'] = function () {
-            return new TemplateGuesser();
-        };
-        $this->listener = new TemplateListener($this->container);
+        $this->container->register(new TemplatingServiceProvider());
+        $this->listener = new TemplateListener($this->container['templating'], new TemplateGuesser());
         $this->request = new Request([], [], [
             '_template' => new Template([]),
         ]);
