@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Loader\AnnotationFileLoader;
 use Symfony\Component\Security\Core\Role\RoleHierarchy;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory;
-use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener;
 use Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener;
@@ -102,10 +101,6 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, E
             return new ParamConverterListener($app['sensio_framework_extra.converter.manager'], true);
         };
 
-        $app['sensio_framework_extra.psr7.listener.response'] = function (Container $app) {
-            return new PsrResponseListener($app['sensio_framework_extra.psr7.http_foundation_factory']);
-        };
-
         $app['sensio_framework_extra.security.expression_language'] = function () {
             return new ExpressionLanguage();
         };
@@ -125,16 +120,8 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, E
             return $manager;
         };
 
-        $app['sensio_framework_extra.psr7.http_message_factory'] = function () {
-            return new DiactorosFactory();
-        };
-
-        $app['sensio_framework_extra.psr7.http_foundation_factory'] = function() {
-            return new HttpFoundationFactory();
-        };
-
         $app['sensio_framework_extra.psr7.converter.server_request'] = function (Container $app) {
-            return new PsrServerRequestParamConverter($app['sensio_framework_extra.psr7.http_message_factory']);
+            return new PsrServerRequestParamConverter(new DiactorosFactory());
         };
 
         $app['sensio_framework_extra.converter.doctrine.orm'] = function (Container $app) {
@@ -163,9 +150,5 @@ class SensioFrameworkExtraServiceProvider implements ServiceProviderInterface, E
         $dispatcher->addSubscriber($app['sensio_framework_extra.cache.listener']);
         $dispatcher->addSubscriber($app['sensio_framework_extra.view.listener']);
         $dispatcher->addSubscriber($app['sensio_framework_extra.security.listener']);
-
-        if (class_exists('Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory')) {
-            $dispatcher->addSubscriber($app['sensio_framework_extra.psr7.listener.response']);
-        }
     }
 }
