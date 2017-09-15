@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5",
+        "php": "^7.0",
         "silex/silex": "^2",
         "sensio/framework-extra-bundle": "^3.0",
         "symfony/expression-language": "^2.8|^3.0",
